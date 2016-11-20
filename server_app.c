@@ -3,7 +3,7 @@
 #include "string.h"
 //#include "time.h"
 #include "unistd.h"
-#include "sys/types.h"
+//#include "sys/types.h"
 #include "sys/socket.h"
 #include "netinet/in.h"
 
@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 	int server_fd, client_fd;
 	int len, msg_size;
 
-	if((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == -1) { // Create Socket
+	if((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {// Create Socket
 		printf("Server : Can't open stream socket\n");
 		exit(0);
 	}
@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
 	//return값으로 server_addr 포인터가 리턴된다.
 	
 	server_addr.sin_family = AF_INET;
-	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);//INADDR_ANY : Server의 IP주소를 찾아줌
+	server_addr.sin_addr.s_addr = htonl(INADDR_ANY); //INADDR_ANY : Server의 IP주소를 찾아줌
 	server_addr.sin_port = htons(1234);
 	//주소를 초기화한다.
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
 		exit(0);
 	}
   
-	if(listen(server_fd, 5) < 0) {//클라이언트로부터 연결 요청을 대기하는 상태로 설정
+	if(listen(server_fd, 5) < 0) { //클라이언트로부터 연결 요청을 대기하는 상태로 설정
 	  printf("Server : Can't listening connect.\n");
 		exit(0);
 	}
@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 		if(msg_size = read(client_fd, buffer, sizeof(buffer)) == -1) //client가 보낸 data를 읽는다.
 			puts("Server : read failed.\n");
 	  else
-			write(client_fd, buffer, msg_size);//client에게 data를 보낸다.
+			write(client_fd, buffer, msg_size); //client에게 data를 보낸다.
 
 		close(client_fd);
 	}
