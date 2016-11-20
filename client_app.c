@@ -26,8 +26,9 @@ int main(int argc, char *argv[]) {
 	server_addr.sin_port = htons(1234);
 	server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-	if(connect(client_fd, (struct sockaddr*) &server_addr, sizeof(server_addr)) < 0) {
+	if(connect(client_fd, (struct sockaddr*) &server_addr, sizeof(server_addr)) == -1) {
 		printf("Connection failed");
+		exit(0);
 	}
 
   return 0;
