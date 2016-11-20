@@ -42,22 +42,26 @@ int main(int argc, char *argv[]) {
 		exit(0);
 	}
 
-  //memset(buffer, 0x00, sizeof(buffer));
 	len = sizeof(client_addr);
 	while(1) {
-		printf("Server : waiting for client...\n");
+		memset(buffer, 0x00, sizeof(buffer));
+
+		printf("Server : Waiting for client...\n");
 		client_fd = accept(server_fd, (struct sockaddr *)&client_addr, &len);
 		//client로부터 요청이 들어올 때까지 blocking 상태로 대기한다.
 
 		if(client_fd < 0) {
-			printf("Server : accept failed.\n");
+			printf("Server : Accept failed.\n");
 			exit(0);
 		}
-
+		
 		if(msg_size = read(client_fd, buffer, sizeof(buffer)) == -1) //client가 보낸 data를 읽는다.
-			puts("Server : read failed.\n");
-	  else
-			write(client_fd, buffer, msg_size); //client에게 data를 보낸다.
+			puts("Server : Read failed.\n");
+	  else {
+			write(client_fd, buffer, strlen(buffer)); //client에게 data를 보낸다.
+			printf("Client : ");
+			puts(buffer);
+		}
 
 		close(client_fd);
 	}
