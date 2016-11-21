@@ -64,6 +64,10 @@ int main(int argc, char *argv[]) {
 		}
 
 		close(client_fd);
+		if(strcmp(buffer,"Quit Server") == 0) {
+			puts("Server : Okay, I'm out...");
+			break;
+		}
 	}
 	close(server_fd);
 	return 0;
