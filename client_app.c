@@ -8,6 +8,7 @@
 #include "arpa/inet.h"
 
 #define BUF_LEN 1024
+#define SERVER_ADDR "127.0.0.1"
 
 int main(int argc, char *argv[]) {
 	
@@ -25,7 +26,7 @@ int main(int argc, char *argv[]) {
 	memset(&server_addr, 0, sizeof(server_addr));
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_port = htons(1234);
-	server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	server_addr.sin_addr.s_addr = inet_addr(SERVER_ADDR);
 
 	if(connect(client_fd, (struct sockaddr*) &server_addr, sizeof(server_addr)) == -1) {
 		printf("Connection failed\n");
